@@ -1,4 +1,4 @@
-# WhatIDo
+# Musiconomi-Firebase
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.0.
 
@@ -38,3 +38,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - deploy the web app with 'firebase deploy --only hosting'  (use 'ng build --prod' first!)
 - deploy functions with 'firebase deploy --only functions'
 - deploy a specific function with 'firebase deploy --only functions:addMessage'
+
+git remote add origin git@github.com:PatternSpacePrime/musiconomi-firebase.git
