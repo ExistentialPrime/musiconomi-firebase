@@ -1,0 +1,47 @@
+
+<div class="row">
+    <h3><i class="fa fa-pie-chart"></i> Dashboard</h3>
+</div>
+
+<!-- Upload and view Tracks on Google Storage -->
+<div class="row" style="margin-top: 10px; border-bottom: 1px solid black;"> 
+    <div class="col-sm-4">
+        <h4>Upload Audio Track: <span style="font-size: 10px;">mp3/mp4 files only</span></h4>
+        <input id="file" name="file" type="file" accept=".mp3,.mp4"><br/>
+        <button (click)="uploadTrack()" class="btn btn-primary">Upload File</button>
+        <h4 style="padding-top: 15px;">Now Playing: {{selectedTrack.filename}} </h4>
+        <div><audio #audioplayer controls="true"></audio></div>
+    </div>  
+    <div class="col-sm-8">
+        <h4>My Audio Tracks:</h4>
+        <table class="table table-bordered table-striped" *ngIf="uploadedTrackList">
+        <tr><th>Play</th><th>Filename</th><th>downloadUrl</th><th>Delete</th></tr>
+        <tr *ngFor="let track of uploadedTrackList | async">
+            <td><button class="btn btn-success" (click)="streamTrack(track)"><i class="fa fa-play-circle" style="font-size: 30px;"></i></button></td>
+            <td>{{track.filename}}</td>
+            <td>{{track.downloadURL | async}}</td>
+            <td><button class="btn btn-danger" (click)="deleteTrack(track)">Delete</button></td>
+        </tr>
+        </table>
+    </div>
+</div>
+
+    
+<!-- Message Demo -->
+<div class="row" style="margin-top: 25px; border-bottom: 1px solid black;"> 
+    <div class="col-sm-6" >
+        <h4>Add New Message (inline Observable)</h4>
+    <input type="text" id="message" placeholder="Enter a message here" (keyup.enter)="SendMsg($event.target.value)" [(ngModel)]="msgVal" />
+    <button class="btn btn-primary" (click)="SendMsg(msgVal)">Submit Message</button>
+    </div>
+    <div class="col-sm-6" >
+    <h4>Messages:</h4>
+    <ul>
+        <li *ngFor="let item of messages | async">Message: {{item.message}}</li>
+    </ul>
+    </div>
+</div>
+    
+
+
+

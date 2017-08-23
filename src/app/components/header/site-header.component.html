@@ -1,0 +1,28 @@
+<div class="container" style="position: relative; border: 1px solid #333; background-color: white; padding: 10px;">
+    <div style="float: left;">
+        <a routerLink="/">
+            <img src="../assets/img/logo-transparent.png" alt="Musiconomi" title="Musiconomi" style="vertical-align: bottom; height: 50px;">
+        </a>
+    </div>
+    <div style="float: right; padding-right: 5px;">
+        <button class="btn btn-warning" (click)="logout()" *ngIf="(user | async)?.uid">Firebase Logout</button>
+        <button class="btn btn-primary" (click)="login()" *ngIf="!(user | async)?.uid">Firebase Login (Anonymous)</button>
+        <p *ngIf="!(user | async)?.uid" style="color: red; padding-top: 10px;">Unauthorized</p>
+        <p *ngIf="(user | async)?.uid" style="color: green; padding-top: 10px;">Authorized</p>
+    </div>
+    <div style="clear:both;"></div>
+
+
+    <div class="row" style="margin-top: 5px;" *ngIf="(user | async)?.uid">
+        <div class="col-sm-3" style="text-align: right;">Temporary Member Navigation:</div>
+        <div class="col-sm-9">
+            <button class="btn btn-primary" routerLink="/dashboard" routerLinkActive="active"><i class="fa fa-pie-chart"></i> Dashboard</button>
+            <button class="btn btn-primary" routerLink="/discover" routerLinkActive="active"><i class="fa fa-heartbeat"></i> Discover</button>
+            <button class="btn btn-primary" routerLink="/upload-track" routerLinkActive="active"><i class="fa fa-upload"></i> Upload Track</button>
+            <button class="btn btn-primary" ><i class="fa fa-pencil-square-o"></i> Blogs</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- Remember to Sassify this page when we implement SCSS -->

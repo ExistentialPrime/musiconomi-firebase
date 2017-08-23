@@ -1,0 +1,48 @@
+
+<div class="row">
+    <h3><i class="fa fa-heartbeat"></i> Discover</h3>
+</div>
+
+
+    
+<!-- Track Demo -->
+<div class="row" style="margin-top: 25px; border-bottom: 1px solid black;">
+    
+    <div class="col-sm-4">
+        <h4>Track Owners:</h4>
+        <ul>
+            <li *ngFor="let owner of trackOwners">{{owner}}</li>
+        </ul>
+    </div>  
+
+    <div class="col-sm-4">
+        <h4>Tracks:</h4>
+        <ul>
+            <li *ngFor="let track of tracks"><span style="color: darkblue;">{{track.title}}</span> by <span style="color: darkgreen;">{{track.artist}}</span></li>
+        </ul>
+    </div>
+
+    <div class="col-sm-4">
+        <h4>Genres:</h4>
+    </div>
+
+</div>
+
+
+<!-- Upload and view Tracks on Google Storage -->
+<div class="row" style="margin-top: 10px; border-bottom: 1px solid black;" > 
+    <div class="col-sm-12">
+        <h4>Available Audio Tracks:</h4>
+        <table class="table table-bordered table-striped" *ngIf="uploadedTrackList">
+        <tr><th>Play</th><th>Filename</th><th>downloadUrl</th></tr>
+        <tr *ngFor="let track of uploadedTrackList | async">
+            <td><button class="btn btn-success" (click)="streamTrack(track)"><i class="fa fa-play-circle" style="font-size: 30px;"></i></button></td>
+            <td>{{track.filename}}</td>
+            <td>{{track.downloadURL | async}}</td>
+        </tr>
+        </table>
+    </div>
+</div>
+
+
+    

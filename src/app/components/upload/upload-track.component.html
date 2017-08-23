@@ -1,0 +1,61 @@
+
+<div class="row">
+    <h3><i class="fa fa-upload"></i> Upload Track</h3>
+</div>
+
+<h4>Note: Working on combining this into one clean upload screen</h4>
+
+<!-- Track Demo -->
+<div class="row" style="margin-top: 25px; border-bottom: 1px solid black; margin-bottom: 20px;"> 
+    <div class="col-sm-4" style="margin-top: 25px;">
+    <h4>Add New Track (API call to a Function)</h4>
+    <input type="text" placeholder="Artist" [(ngModel)]="newTrackArtist" />
+    <input type="text" placeholder="Id (ex. 1)" [(ngModel)]="newTrackId" />
+    <input type="text" placeholder="Title" [(ngModel)]="newTrackTitle" />
+    <input type="text" placeholder="Audio Url" [(ngModel)]="newTrackUrl" />
+    <button class="btn btn-primary" (click)="SendTrack()">Submit Track</button>
+    <div *ngIf="addTrackResult">Result: {{addTrackResult}}</div>
+    </div>
+    
+    <div class="col-sm-4">
+    <h4>Track Owners:</h4>
+    <ul>
+        <!--<li *ngFor="let owner of trackOwners">{{owner}}</li>-->
+    </ul>
+    </div>  
+
+    <div class="col-sm-4">
+    <h4>Tracks:</h4>
+    <ul>
+        <!--<li *ngFor="let track of tracks"><span style="color: darkblue;">{{track.title}}</span> by <span style="color: darkgreen;">{{track.artist}}</span></li>-->
+    </ul>
+    </div>
+
+</div>
+
+
+<!-- Upload and view Tracks on Google Storage -->
+<div class="row" style="margin-top: 10px; border-bottom: 1px solid black;" > 
+    <div class="col-sm-12">
+        <h4>Upload Audio Track: <span style="font-size: 10px;">mp3/mp4 files only</span></h4>      
+        <input id="file" name="file" type="file" accept=".mp3,.mp4"><br/>
+        <button (click)="uploadTrack()" class="btn btn-primary">Upload File</button>
+        <h4 style="padding-top: 15px;">Now Playing: {{selectedTrack.filename}} </h4>
+        <div><audio #audioplayer controls="true"></audio></div>
+    </div>  
+    <div class="col-sm-12">
+        <h4>Available Audio Tracks:</h4>
+        <table class="table table-bordered table-striped" *ngIf="uploadedTrackList">
+        <tr><th>Play</th><th>Filename</th><th>downloadUrl</th><th>Delete</th></tr>
+        <tr *ngFor="let track of uploadedTrackList | async">
+            <td><button class="btn btn-success" (click)="streamTrack(track)"><i class="fa fa-play-circle" style="font-size: 30px;"></i></button></td>
+            <td>{{track.filename}}</td>
+            <td>{{track.downloadURL | async}}</td>
+            <td><button class="btn btn-danger" (click)="deleteTrack(track)">Delete</button></td>
+        </tr>
+        </table>
+    </div>
+</div>
+
+
+    
