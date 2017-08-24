@@ -4,11 +4,11 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 export const firebaseConfig = {
-  apiKey: "AIzaSyBKhNy7cWUEkq1-xx15i2AiAWfsVVyLfLo",
-  authDomain: "musiconomi-sandbox.firebaseapp.com",
-  databaseURL: "https://musiconomi-sandbox.firebaseio.com",
-  storageBucket: "musiconomi-sandbox.appspot.com",
-  messagingSenderId: "740932574333"
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  storageBucket: "",
+  messagingSenderId: ""
 };
 
 // Modules
