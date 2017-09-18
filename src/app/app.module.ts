@@ -1,18 +1,18 @@
 // Firebase Imports
-//------------------------------------------------------------
+// ------------------------------------------------------------
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 export const firebaseConfig = {
-  apiKey: "",
-  authDomain: "",
-  databaseURL: "",
-  storageBucket: "",
-  messagingSenderId: ""
+  apiKey: 'AIzaSyBKhNy7cWUEkq1-xx15i2AiAWfsVVyLfLo',
+  authDomain: 'musiconomi-sandbox.firebaseapp.com',
+  databaseURL: 'https://musiconomi-sandbox.firebaseio.com',
+  storageBucket: 'musiconomi-sandbox.appspot.com',
+  messagingSenderId: '740932574333'
 };
 
 // Modules
-//-----------------------------------------------------------
+// -----------------------------------------------------------
 import { BrowserModule }            from '@angular/platform-browser';
 import { BrowserAnimationsModule }  from '@angular/platform-browser/animations';
 import { FormsModule }              from '@angular/forms';
@@ -22,7 +22,7 @@ import { RouterModule }             from '@angular/router';
 
 
 // Components
-//-----------------------------------------------------------
+// -----------------------------------------------------------
 import { AppComponent }           from './app.component';
 import { DashboardComponent }     from './components/dashboard/dashboard.component';
 import { DiscoverComponent }      from './components/discover/discover.component';
@@ -31,11 +31,11 @@ import { SiteHeaderComponent }    from './components/header/site-header.componen
 import { UploadTrackComponent }   from './components/upload/upload-track.component';
 
 // Services
-//-----------------------------------------------------------
+// -----------------------------------------------------------
 import { AuthGuard }              from './services/authGuard.service';
 
 // Declaration
-//-----------------------------------------------------------
+// -----------------------------------------------------------
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +51,7 @@ import { AuthGuard }              from './services/authGuard.service';
     AngularFireAuthModule,
     BrowserModule,
     BrowserAnimationsModule,
-	  FormsModule,
+    FormsModule,
     HttpModule,
 
     // Angular Routes (can do this in seperate file if desired)
@@ -63,7 +63,7 @@ import { AuthGuard }              from './services/authGuard.service';
       { path: '**', redirectTo: '' }
     ]),
 
-	  
+
   ],
   providers: [
     AuthGuard,

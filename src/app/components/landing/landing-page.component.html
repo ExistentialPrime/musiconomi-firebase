@@ -17,5 +17,40 @@
             <li>Ethereum</li>
         </ul>
     </div>
+
+    <div class="col-sm-9"  style="margin-top: 20px; border-top: 1px solid #555;">
+        <h4>MPEG-DASH Player Demo</h4>
+        <p>See basic tutorial at <a href="https://www.html5rocks.com/en/tutorials/eme/basics/#common-encryption">https://www.html5rocks.com/en/tutorials/eme/basics/#common-encryption</a></p>
+        <p style="font-weight: bold;">Currently Playing: <span style="color: orange;">{{currentFile}}</span></p>
+        <!--<video controls #dashplayer>
+            <source src='../assets/mp4/movie-cenc.mp4'  />
+            <p>This browser does not support the video element.</p>
+        </video>-->
+        <video controls #dashplayer preload="metadata">
+                <!-- <source src='../assets/mp4/example.webm'  type="video/webm" /> -->
+                <p>This browser does not support the video element.</p>
+        </video>
+        <h4>Steps to Implement:</h4>
+        <ol>
+            <li>Convert mp3 to mp4 (currently using GPAC 'import' command)</li>
+            <li>Fragment mp4 (using Bento4's mp4fragment command)</li>
+            <li>Encrypt mp4 (using Bento4s mp4encrypt command)</li>
+            <li>Host/upload mp4 file (make sure ID matches the track ID in the encryption xml)</li>
+            <li>Add database line with unique track id and decryption key</li>
+        </ol>
+    </div>
+
+    <div class="col-sm-3" style="margin-top: 20px; border-top: 1px solid #555;">
+        <h4>Choose File To play:</h4>
+        <div class="row">
+            <div class="col-xs-12"><button class="btn btn-primary btn-block" (click)="playAudioFile('1')">Loki.mp4 (unencrypted)</button></div>
+            <div class="col-xs-12"><button class="btn btn-warning btn-block" (click)="playAudioFile('2')">Loki_cenc.mp4 (encrypted)</button></div>
+            <div class="col-xs-12"><button class="btn btn-primary btn-block" (click)="playAudioFile('3')">Loki.webm (unencrypted)</button></div>
+            <div class="col-xs-12"><button class="btn btn-warning btn-block" (click)="playAudioFile('4')">Loki_cenc.webm (encrypted)</button></div>
+            <div class="col-xs-12"><button class="btn btn-success btn-block" (click)="requestKey()">Request Key</button></div>
+            <p style="text-align: center;">Current Key: <span style="color: blue;">{{currentKey}}</span></p>
+        </div>
+    </div>
+
 </div>
 
