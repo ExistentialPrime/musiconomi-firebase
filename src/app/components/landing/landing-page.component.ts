@@ -35,12 +35,12 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
       0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf
     ]);
     this.config = [{
-      initDataTypes: ['cenc'],    // 'webm'
+      initDataTypes: ['cenc'],
       audioCapabilities: [{
         contentType: 'audio/mp4; codecs="mp4a.40.2"'
       }],
       videoCapabilities: [{
-        contentType: 'video/mp4; codecs="avc1.42E01E"'   // 'video/webm; codecs='vp8''
+        contentType: 'video/mp4; codecs="avc1.42E01E"'
       }]
     }];
 

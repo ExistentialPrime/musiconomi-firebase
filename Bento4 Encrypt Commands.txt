@@ -1,0 +1,37 @@
+Video File (Encrypt + DASH)
+-------------
+./mp4fragment sao.mp4 sao-frag.mp4
+./mp4dash --marlin --encryption-key=121a0fca0f1b475b8910297fa8e0a07e:a0a1a2a3a4a5a6a7a8a9aaabacadaeaf sao-frag.mp4
+
+
+Audio encryption only  (need to convert mp3 to an mp4 format first)  -https://www.bento4.com/developers/dash/encryption-and-drm/
+---------------------------
+./mp4fragment Loki.mp4 loki-frag.mp4  (do we really need to frag it? yes, to use bento we do)
+./mp4encrypt --method MPEG-CENC --key 1:a0a1a2a3a4a5a6a7a8a9aaabacadaeaf:0123456789abcdef --property 1:KID:121a0fca0f1b475b8910297fa8e0a07e loki-frag.mp4 loki-cenc.mp4
+
+webm version
+./mp4fragment Loki.webm Loki_frag.webm
+./mp4encrypt --method MPEG-CENC --key 1:a0a1a2a3a4a5a6a7a8a9aaabacadaeaf:0123456789abcdef --property 1:KID:121a0fca0f1b475b8910297fa8e0a07e --global-option mpeg-cenc.eme-pssh:true Loki_frag.webm Loki_cenc.webm
+
+
+with header (DASHed)
+./mp4dash --encryption-key=121a0fca0f1b475b8910297fa8e0a07e:a0a1a2a3a4a5a6a7a8a9aaabacadaeaf --marlin --playready-header=LA_URL:http://playready.directtaps.net/pr/svc/rightsmanager.asmx --widevine-header=provider:widevine_test#content_id:2a Loki_frag.webm
+
+mp4 video encryption test (see https://github.com/cpearce/mse-eme/blob/master/media/bento-encrypt.sh)
+-----------------------------
+./mp4fragment movie.mp4 movie-fragmented.mp4
+./mp4encrypt --method MPEG-CENC --key 1:a0a1a2a3a4a5a6a7a8a9aaabacadaeaf:0123456789abcdef --property 1:KID:121a0fca0f1b475b8910297fa8e0a07e movie-fragmented.mp4 movie-cenc.mp4
+
+.mp4info --verbose Loki.webm
+
+
+
+== NOTE: GPAC MP4Box only encrypts video, cant get it t encrypt audio!! ==
+MP4Box crypt (info at https://gpac.wp.imt.fr/mp4box/encryption/ismacryp/ and https://gpac.wp.imt.fr/mp4box/encryption/common-encryption/)
+-----------------
+MP4Box -add Loki.mp3 Loki.mp4
+MP4Box -crypt cenc.xml Loki.mp4 -out Loki_encrypted.mp4
+
+MP4Box -dash 1000 -profile live Loki_encrypted.mp4 (dash segmenter)
+
+MP4Box -crypt cenc.xml sao.mp4 -out sao_e.mp4
