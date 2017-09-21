@@ -19,9 +19,14 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "assets/css/styles.css"
+        "assets/css/styles.css",
+        "../node_modules/videogular2/fonts/videogular.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/sweetalert2/dist/sweetalert2.js",
+        "../node_modules/dashjs/dist/dash.all.min.js",
+        "../node_modules/dashjs/dist/dash.mediaplayer.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

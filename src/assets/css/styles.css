@@ -6,3 +6,7 @@ body {
 
 
 .table { background-color: white; }
+
+th { padding-right: 10px; }
+td { padding-right: 10px; }
+td i { cursor: pointer; color: green; }

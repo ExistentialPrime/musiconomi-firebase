@@ -20,6 +20,14 @@ import { HttpModule }               from '@angular/http';
 import { NgModule }                 from '@angular/core';
 import { RouterModule }             from '@angular/router';
 
+// Videogular Modules
+// -----------------------------
+import {VgCoreModule} from 'videogular2/core';
+import {VgControlsModule} from 'videogular2/controls';
+import {VgOverlayPlayModule} from 'videogular2/overlay-play';
+import {VgBufferingModule} from 'videogular2/buffering';
+import {VgStreamingModule} from 'videogular2/streaming';
+
 
 // Components
 // -----------------------------------------------------------
@@ -63,6 +71,12 @@ import { AuthGuard }              from './services/authGuard.service';
       { path: '**', redirectTo: '' }
     ]),
 
+    // Videogular modules
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
+    VgStreamingModule
 
   ],
   providers: [
