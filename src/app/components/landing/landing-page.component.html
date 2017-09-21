@@ -14,105 +14,71 @@
             <li>Angular4</li>
             <li>Firebase</li>
             <li>Google Cloud</li>
-            <li>Ethereum</li>
         </ul>
     </div>
 
+    
     <div class="col-sm-8"  style="margin-top: 20px; border-top: 1px solid #555;">
-        <h4>Videogular Player Demo</h4>
-        <p style="font-weight: bold;">Currently Playing: <span style="color: orange;">{{vgDashSource}}</span></p>
-        <vg-player (onPlayerReady)="onPlayerReady($event)">
-            <vg-overlay-play></vg-overlay-play>
-            <vg-buffering></vg-buffering>
-        
-            <vg-scrub-bar [vgSlider]="true">
-                <vg-scrub-bar-current-time [vgSlider]="true"></vg-scrub-bar-current-time>
-                <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-            </vg-scrub-bar>
-        
-            <vg-controls>
-                <vg-play-pause></vg-play-pause>
-                <vg-playback-button></vg-playback-button>
-        
-                <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-        
-                <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
-        
-                <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
-                <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-        
-                <vg-track-selector></vg-track-selector>
-                <vg-mute></vg-mute>
-                <vg-volume></vg-volume>
-            </vg-controls>
-            <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls [vgDash]="vgDashSource" >
-            </video>
-        </vg-player>
-        <div *ngIf="playerError" style="padding:2px; color: red; font-weight: bold;">{{playerError}}</div>
-    </div>
-
-    <div class="col-sm-4" style="margin-top: 20px; border-top: 1px solid #555;">
-        <h4>Play with Videogular Player</h4>
-        <table class="table">
-            <tr><th>Play</th><th>Track</th><th>Key</th></tr>
-            <tr><td><i class="fa fa-play" (click)="playVideogular('0')"></i></td><td>Sintel Video mpd</td><td>No Key</td></tr>
-            <tr><td><i class="fa fa-play" (click)="playVideogular('1')"></i></td><td>Loki.mp4</td><td>No Key</td></tr>
-            <tr><td><i class="fa fa-play" (click)="playVideogular('2')"></i></td><td>Loki.mpd</td><td>Request Key</td></tr>
-            <tr><td><i class="fa fa-play" (click)="playVideogular('3')"></i></td><td>movie_audio.mp4</td><td>No Key</td></tr>
-            <tr><td><i class="fa fa-play" (click)="playVideogular('4')"></i></td><td>movie_audio.mpd</td><td>Request Key</td></tr>
-            <tr><td><i class="fa fa-play" (click)="playVideogular('5')"></i></td><td>example.webm</td><td>Request Key</td></tr>
-        </table>
-    </div>
-
-    <div class="col-sm-9"  style="margin-top: 20px; border-top: 1px solid #555;">
-        <h4>DASH.JS Player Demo</h4>
+        <h4>Shaka Player Demo</h4>
         <p style="font-weight: bold;">Currently Playing: <span style="color: orange;">{{currentFile}}</span></p>
-        <!-- Dash.js player documentation here: https://github.com/Dash-Industry-Forum/dash.js/blob/development/README.md -->
-        <video data-dashjs-player controls #dashplayer style="background-color: black; border: 1px solid #555;">
+        <!-- Dash.js player documentation here: https://shaka-player-demo.appspot.com/docs/api/tutorial-basic-usage.html -->
+        <video #shakaplayer controls autoplay style="background-color: black; border: 1px solid #555;" width="640" height="400">
             <p>This browser does not support the video element.</p>
         </video>
         <div *ngIf="playerError" style="padding:2px; color: red; font-weight: bold;">{{playerError}}</div>
         <h4>Steps to Implement:</h4>
         <ol>
-            <li>Convert mp3 to mp4 (command line tool???)</li>
+            <li>Convert mp3 to mp4 (FFMPEG command line tool)</li>
             <li>Encrypt mp4 (using ShakaPackager and the enable_fixed_key_encryption flag)</li>
             <li>Host/upload audio/video files and .mpd manifest</li>
             <li>Add database line for the track with the unique key id and decryption key</li>
-            <li>NOTE: Encrypted files play for 9 seconds clearly as their 'sample' portion</li>
+            <li>NOTE: Encrypted files play clearly for 9 seconds as a 'sample' even with incorrect key</li>
         </ol>
     </div>
 
-    <div class="col-sm-3" style="margin-top: 20px; border-top: 1px solid #555;">
-        <h4>Choose File To play:</h4>
-        <div class="row">
-            <div class="col-xs-12"><button class="btn btn-primary btn-block" (click)="playAudioFile('1')">Loki.mp4 (unencrypted)</button></div>
-            <div class="col-xs-12"><button class="btn btn-warning btn-block" (click)="playAudioFile('2')">Loki_cenc.mpd (encrypted)</button></div>
-            <div class="col-xs-12"><button class="btn btn-success btn-block" (click)="requestKey('121a0fca0f1b475b8910297fa8e0a07e')">Request Key</button></div>
-        </div>
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-xs-12"><button class="btn btn-primary btn-block" (click)="playAudioFile('3')">movie_audio.mp4 (unencrypted)</button></div>
-            <div class="col-xs-12"><button class="btn btn-warning btn-block" (click)="playAudioFile('4')">movie_audio_cenc.mpd (encrypted)</button></div>
-            <div class="col-xs-12"><button class="btn btn-success btn-block" (click)="requestKey('69690fca0f1b475b8910297fa8e0a07e')">Request Key</button></div>
-        </div>
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-xs-12"><button class="btn btn-primary btn-block" (click)="playAudioFile('5')">example.webm (encrypted)</button></div>
-            <div class="col-xs-12"><button class="btn btn-success btn-block" (click)="requestKey('examplekeyid')">Request Key</button></div>            
-        </div>
-        <div class="row" style="margin-top: 10px;">
-            <p>Current Key: <span style="color: blue;">{{currentKeyString}}</span></p>
-            <p>Raw Key: <span style="color: blue;">{{KEY}}</span></p>
-        </div>
+    <div class="col-sm-4" style="margin-top: 20px; border-top: 1px solid #555;">
+        <h4>Play with ShakaPlayer</h4>
+        <table class="table"  style="font-size: 11px;">
+            <tr><th>Play</th><th>Track</th><th>Encryption</th></tr>
+            <tr><td><i class="fa fa-play" (click)="playShaka('0')"></i></td><td>Envivo Sample Video mpd</td><td>Not Encrypted</td></tr>
+            <tr><td><i class="fa fa-play" (click)="playShaka('1')"></i></td><td>Loki_cenc.mpd</td><td>ClearKey Encrypted</td></tr>
+            <tr><td><i class="fa fa-play" (click)="playShaka('2')"></i></td><td>Nebula.mpd</td><td>ClearKey Encrypted</td></tr>
+            <tr><td><i class="fa fa-play" (click)="playShaka('3')"></i></td><td>movie_audio_cenc.mpd</td><td>ClearKey Encrypted</td></tr>
+            <tr><td colspan="3" style="text-align: center; font-weight: bold;">Note: Shaka will NOT play .mp4 or .webm files</td></tr>
+        </table>
     </div>
 
+    
+    <div class="col-sm-12"  style="margin-top: 20px; border-top: 1px solid #555;">
+        <pre>
+                MP3 to DASH (encrypted)
+                -------------------------
+                1. Convert mp3 file to mp4 format 
+                -- Use FFMPEG: ./ffmpeg -i Nebula.mp3 -codec:a aac Nebula.mp4 
+                -- With Cover Image: ./ffmpeg -i Nebula.mp3 -loop 1 -i CoverImage.jpg -c:a aac -c:v libx264 -shortest Nebula_with_cover.mp4
+                -- Size notes: Basic mp3: 2.1 MB | mp4 with Cover: 3.6MB | mp4 no cover: 1.5 MB (cover image only visible in VIDEO player, not AUDIO)
+                2. Choose a key and KeyID (Key must be 32 characters in hex code, keyID can be anything, but a GUID is encouraged)
+                -- Key ID: 121a0fca0f1b475b8910297fa8e0a07e
+                -- Key: a0a1a2a3a4a5a6a7a8a9aaabacadaeaf
+                3. Encrypt with Shaka Packager
+                -- ./packager in=Nebula.mp4,stream=audio,output=Nebula_encrypted.mp4 --enable_fixed_key_encryption --key_id 121a0fca0f1b475b8910297fa8e0a07e --key a0a1a2a3a4a5a6a7a8a9aaabacadaeaf --generate_static_mpd --mpd_output Nebula.mpd
+                -- NOTE: Haven't figured out the right command to package an mp4 with cover image working with shaka, but here's what i have so far
+                -- ./packager in=Nebula_with_cover.mp4,stream=audio,output=Nebula_with_cover_audio.mp4 in=Nebula_with_cover.mp4,stream=video,output=Nebula_with_cover_video.mp4 --enable_fixed_key_encryption --key_id 121a0fca0f1b475b8910297fa8e0a07e --key a0a1a2a3a4a5a6a7a8a9aaabacadaeaf --generate_static_mpd --mpd_output Nebula_with_cover.mpd
+                4. Copy both the output audio/video file(s) and the generated .mpd manifest over to web server
+                5. Play with Shaka player using the proper CENC key for decrypting and enjoy!
+        </pre>
+    </div>
 
     <div class="col-sm-12"  style="margin-top: 20px; border-top: 1px solid #555;">
-        <h4>HTML5 Audio player</h4>
-        <p>Now Playing: Loki_cenc.mpd</p>
-        <audio controls #audioplayer>
-            <source src='../assets/mp4/Loki_cenc.mpd' />
-        </audio>
-        <div style="padding:2px; color: red;">Does not recognize .mpd files, and isn't firing the decrypt event for encrypted .mp4 files</div>
-    </div>
+            <h4>HTML5 Video Element Demo</h4>
+            <p style="font-weight: bold;">Currently Playing: <span style="color: orange;">Nebula.mp4</span> (in VIDEO element with cover image)</p>
+            <video controls width="640" height="400">
+                <!-- NOTE: The cover is only distinguishable in a Video player, not a basic audio player -->
+                <!-- <source src="../assets/mp4/Nebula_no_cover.mp4" /> -->
+                <source src="../assets/mp4/Nebula.mp4" />
+            </video>
+        </div>
+    
 
 </div>
 

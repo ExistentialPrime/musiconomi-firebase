@@ -1,0 +1,35 @@
+Documentation: https://google.github.io/shaka-packager/html/tutorials/dash.html
+
+File Info (MetaData)
+------------------------
+./packager input=Loki.mp4 --dump_stream_info
+
+
+DASH + Encrypt an Audio mp4
+-----------------------------
+./packager in=Loki.mp4,stream=audio,output=Loki_cenc.mp4 --enable_fixed_key_encryption --key_id 121a0fca0f1b475b8910297fa8e0a07e --key a0a1a2a3a4a5a6a7a8a9aaabacadaeaf --generate_static_mpd  --mpd_output Loki_cenc.mpd
+
+
+DASH + Encrypt a Movie (Audio only)
+------------------------------------
+./packager input=movie.mp4 --dump_stream_info				- WORKS
+./packager in=movie.mp4,stream=audio,out=movie_audio.mp4    - WORKS  (also plays fine inside web app)
+./packager in=movie_audio.mp4,stream=audio,output=movie_audio_cenc.mp4 --enable_fixed_key_encryption --key_id 69690fca0f1b475b8910297fa8e0a07e --key b0b1b2b3b4b5b6b7b8b9babbbcbdbebf --generate_static_mpd --mpd_output movie_audio_cenc.mpd
+
+
+MP3 to DASH (encrypted)
+-------------------------
+1. Convert mp3 file to mp4 format 
+ -- Use FFMPEG: ./ffmpeg -i Nebula.mp3 -codec:a aac Nebula.mp4 
+ -- With Cover Image: ./ffmpeg -i Nebula.mp3 -loop 1 -i CoverImage.jpg -c:a aac -c:v libx264 -shortest Nebula_with_cover.mp4
+ -- Size notes: Basic mp3: 2.1 MB | mp4 with Cover: 3.6MB | mp4 no cover: 1.5 MB (cover image only visible in VIDEO player, not AUDIO)
+2. Choose a key and KeyID (Key must be 32 characters in hex code, keyID can be anything, but a GUID is encouraged)
+ -- Key ID: 121a0fca0f1b475b8910297fa8e0a07e
+ -- Key: a0a1a2a3a4a5a6a7a8a9aaabacadaeaf
+ 3. Encrypt with Shaka Packager
+ -- ./packager in=Nebula.mp4,stream=audio,output=Nebula_encrypted.mp4 --enable_fixed_key_encryption --key_id 121a0fca0f1b475b8910297fa8e0a07e --key a0a1a2a3a4a5a6a7a8a9aaabacadaeaf --generate_static_mpd --mpd_output Nebula.mpd
+ -- NOTE: Haven't figured out the right command to package an mp4 with cover image working with shaka, but here's what i have so far
+ -- ./packager in=Nebula_with_cover.mp4,stream=audio,output=Nebula_with_cover_audio.mp4 in=Nebula_with_cover.mp4,stream=video,output=Nebula_with_cover_video.mp4 --enable_fixed_key_encryption --key_id 121a0fca0f1b475b8910297fa8e0a07e --key a0a1a2a3a4a5a6a7a8a9aaabacadaeaf --generate_static_mpd --mpd_output Nebula_with_cover.mpd
+ 4. Copy both the output audio/video file(s) and the generated .mpd manifest over to web server
+ 5. Play with Shaka player using the proper CENC key for decrypting and enjoy!
+ 

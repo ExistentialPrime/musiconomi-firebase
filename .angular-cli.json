@@ -19,13 +19,11 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "assets/css/styles.css",
-        "../node_modules/videogular2/fonts/videogular.css"
+        "assets/css/styles.css"
       ],
       "scripts": [
-        "../node_modules/sweetalert2/dist/sweetalert2.js",
-        "../node_modules/dashjs/dist/dash.all.min.js",
-        "../node_modules/dashjs/dist/dash.mediaplayer.min.js"
+        "../node_modules/shaka-player/dist/shaka-player.compiled.js",
+        "../node_modules/sweetalert2/dist/sweetalert2.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
